@@ -13,15 +13,19 @@ const ThoughtSchema = new Schema(
       type: Date,
       default: Date.now,
       get: (createdAtVal) => {
-        //Need to format the date before returning
-        return createdAtVal;
+        // Format the date to mm/dd/yy
+        return createdAtVal.toLocaleDateString("en-US", {
+          year: "2-digit",
+          month: "2-digit",
+          day: "2-digit",
+        });
       },
     },
     username: {
       type: String,
       required: true,
     },
-    //reaction set as a subdocument to thoughts
+    // reaction set as a subdocument to thoughts
     reactions: [ReactionSchema],
     userId: {
       type: Schema.Types.ObjectId,

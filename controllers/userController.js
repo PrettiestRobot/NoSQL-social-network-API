@@ -55,17 +55,12 @@ module.exports = {
   //DELETE to remove user by its _id and associate thoughts when deleted
   async deleteUser(req, res) {
     try {
-      // Find the user by its _id
       const user = await User.findOne({ _id: req.params.id });
       if (!user) {
         res.status(404).json({ message: "No user found with this id!" });
         return;
       }
-
-      // Delete all thoughts associated with this user
       await Thought.deleteMany({ userId: user._id });
-
-      // Delete the user
       await User.deleteOne({ _id: req.params.id });
 
       res.json({ message: "User and associated thoughts have been deleted." });

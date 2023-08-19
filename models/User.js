@@ -1,19 +1,19 @@
 const { Schema, model } = require("mongoose");
 
-//Schema to create User model
+// Schema to create User model
 const UserSchema = new Schema(
   {
     username: {
       type: String,
       unique: true,
-      required: "Username is required",
+      required: [true, "Username is required"],
       trim: true,
     },
     email: {
       type: String,
       unique: true,
-      required: "Email is required",
-      match: [/.+@.+\..+/],
+      required: [true, "Email is required"],
+      match: [/.+@.+\\..+/],
     },
     thoughts: [
       {
@@ -39,6 +39,6 @@ UserSchema.virtual("friendCount").get(function () {
   return this.friends.length;
 });
 
-const User = model("User", userSchema);
+const User = model("User", UserSchema);
 
 module.exports = User;
