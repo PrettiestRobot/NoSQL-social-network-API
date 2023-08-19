@@ -21,7 +21,13 @@ const ThoughtSchema = new Schema(
       type: String,
       required: true,
     },
+    //reaction set as a subdocument to thoughts
     reactions: [ReactionSchema],
+    userId: {
+      type: Schema.Types.ObjectId,
+      ref: "User",
+      required: true,
+    },
   },
   {
     toJSON: {
