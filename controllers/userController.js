@@ -35,11 +35,11 @@ module.exports = {
       res.status(500).json(err);
     }
   },
-  //PUT too update user by its _id
+  //PUT to update user by its _id
   async updateUserById(req, res) {
     try {
       const user = await User.findOneAndUpdate(
-        { _id: req.params.userID },
+        { _id: req.params.id },
         { $set: req.body },
         { runValidators: true, new: true }
       );

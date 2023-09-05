@@ -13,25 +13,12 @@ module.exports = {
     }
   },
 
-  // Get all thoughts by user id
-  async getThoughtsByUserId(req, res) {
+  // Get a single thought by its id
+  async getThoughtById(req, res) {
     try {
-      const thoughts = await Thought.find({ userId: req.params.userId });
-      res.json(thoughts);
-    } catch (err) {
-      console.log(err);
-      res.status(500).json(err);
-    }
-  },
-
-  // Get one thought by user id
-  async getOneThoughtByUserId(req, res) {
-    try {
-      const thought = await Thought.findOne({ userId: req.params.userId });
+      const thought = await Thought.findOne({ _id: req.params.id });
       if (!thought) {
-        res
-          .status(404)
-          .json({ message: "No thought found with this user id!" });
+        res.status(404).json({ message: "No user found with this id!" });
         return;
       }
       res.json(thought);
