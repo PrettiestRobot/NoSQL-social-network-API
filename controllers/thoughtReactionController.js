@@ -140,8 +140,8 @@ module.exports = {
   async deleteReaction(req, res) {
     try {
       // Find the thought by id and pull the reaction from its reactions array based on the reaction’s _id
-      const thought = await Thought.findByIdAndUpdate(
-        req.params.thoughtId,
+      const thought = await Thought.findOneAndUpdate(
+        { _id: req.params.thoughtId },
         { $pull: { reactions: { _id: req.params.reactionId } } },
         { new: true }
       );
