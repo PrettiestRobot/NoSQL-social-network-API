@@ -36,7 +36,7 @@ module.exports = {
     }
   },
   //PUT too update user by its _id
-  async updateUser(req, res) {
+  async updateUserById(req, res) {
     try {
       const user = await User.findOneAndUpdate(
         { _id: req.params.userID },
@@ -53,7 +53,7 @@ module.exports = {
     }
   },
   //DELETE to remove user by its _id and associate thoughts when deleted
-  async deleteUser(req, res) {
+  async deleteUserById(req, res) {
     try {
       const user = await User.findOne({ _id: req.params.id });
       if (!user) {
